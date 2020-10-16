@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	//返回?后的json对象s
+	function getRequest() {
+		//获取url中"?"符后的字串
+		var url = location.search;
+		var theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+			var str = url.substr(1);
+			var strs = str.split("&");
+			for (var i = 0; i < strs.length; i++) {
+				theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			}
+		}
+		return theRequest;
+	}
+
+
+		var id = getRequest();
+		$.post("showID.action", id, function(data) {
+			$("#deptno").val(data.id);
+			$("#dname").val(data.name);
+			$("#loc").val(data.author);
+			$("#loc2").val(data.time);
+			$("#loc3").val(data.type);
+
+		}, "json");
+
+</script>
+<style type="text/css">
+#content {
+	margin: 20px auto;
+	width: 800px;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>修改详细页面</h1>
+		<form action="modify.action" method="post">
+			<table border="1" width="600px">
+				<tr>
+					<td>图书编号</td>
+					<td><input type="text" name="id" id="deptno"
+						readonly="readonly" /></td>
+				</tr>
+				<tr>
+					<td>图书名称</td>
+					<td><input type="text" name="name" id="dname" /></td>
+				</tr>
+				<tr>
+					<td>作者</td>
+					<td><input type="text" name="author" id="loc" /></td>
+				</tr>
+				<tr>
+					<td>出版日期</td>
+					<td><input type="text" name="time" id="loc2" /></td>
+				</tr>
+				<tr>
+					<td>类型</td>
+					<td><input type="text" name="type" id="loc3" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="修改" />
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

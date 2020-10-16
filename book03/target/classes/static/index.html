@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+
+
+	         
+	function deletes(id){		
+		var ss=confirm("是否删除?")
+		if(ss==true){
+			$.post("delete.action",{"id":id},function(data){
+				if(data>0){
+					$("tr[name="+id+"]").remove();				
+				}
+				
+			})
+		}
+	}
+	
+
+var index=getRequest();
+	$.getJSON("show.action",index,
+	function(data) {
+	$("body").append("<h1>图书信息</h1>");
+	$("body").append("<a id='add' href='insert.html'>新增</a>");
+	$("body").append("<table id='tab' width='800px' border='1' id='tab'><tr><th>图书编号</th><th>图书名称</th><th>作者</th><th>出版日期</th></tr>");
+	$("#tab").append("<A id='fi' href='index.html?index=1'>首页  </A>"
+			+"<A id='pe' href='index.html?index="+parseInt(data.pageNum-1)+"'>上一页  </A>"
+			+"<A id='ne' href='index.html?index="+parseInt(data.pageNum+1)+"'>下一页   </A>"
+			+"<A id='la' href='index.html?index="+data.pages+"'>末页</A>"
+			)
+	$(data.list).each(function(i, e) {
+		var tr="<tr name="+e.id+" ><td>"+e.id+"</td><td>"+e.name+"</td><td>"+e.author+"</td><td>"+e.time+"</td><td><a onclick='deletes("+e.id+")' >删除</a></td>"+"<td><a href='update.html?met=ss&id="+e.id+"' >修改</a></td>"
+			$("#tab").append(tr);
+			
+	});
+			//隔行变色
+			changColor();
+			$("body").append("</table>");
+
+		});
+	
+	
+	
+	
+	
+	//隔行变色
+    function changColor() {
+        $("tr").css("background-color", "#ffffff");
+        $("tr:odd").css("background-color", "#90EE90");
+    }
+	
+
+    function getRequest() {
+        //获取url中"?"符后的字串
+        var url = location.search;
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            var strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+</script>
+<style type="text/css">
+#add{
+display:block;}
+table, h1,a {
+	margin: 0px auto;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.BookDao">
+
+
+	<select id="getAll" resultType="Book">
+		select * from bookmanage
+	</select>
+
+	<select id="getById" parameterType="int" resultType="Book">
+		SELECT *
+		FROM bookmanage WHERE id=#{id}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM bookmanage WHERE
+		id=#{id}
+	</delete>
+
+	<update id="modify" parameterType="book">
+		UPDATE bookmanage SET
+		`name`=#{bb.name},author=#{bb.author},`time`=#{bb.time},`type`=#{bb.type}
+		WHERE id=#{bb.id}
+	</update>
+
+	<insert id="addBook" parameterType="book">
+		INSERT INTO bookmanage
+		(`name`,author,`time`,`type`)
+		VALUES(#{bb.name},#{bb.author},#{bb.time},#{bb.type})
+	</insert>
+
+</mapper>

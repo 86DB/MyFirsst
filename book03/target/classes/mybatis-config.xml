@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!--设置mybatis的运行行为 -->
+	<settings>
+		<!--主键自增 -->
+		 <setting name="useGeneratedKeys" value="true" />  
+		<!--开启自动映射 -->
+		<setting name="autoMappingBehavior" value="FULL" />
+		<!--开启数据库列名和实体属性驼峰命名规则 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!--日志指定 -->
+		<setting name="logImpl" value="LOG4J" />
+		
+		<!-- 开启懒加载全局开关 -->
+ 		<setting name="lazyLoadingEnabled" value="true"/>
+ 		<!--开启按需加载，false不会加载不相干属性，true，只有相关都去查  -->
+ 		<setting name="aggressiveLazyLoading" value="false"/>
+		
+		
+	</settings>
+	
+	<!--分页插件  -->
+
+
+
+	
+</configuration>

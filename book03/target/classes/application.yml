@@ -1,0 +1,45 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /book
+
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+    hiddenmethod:
+      filter:
+        enabled: true
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/templates/,classpath:/static/,classpath:/META-NF/resources/,classpath:/resources/,classpath:/public/,classpath:/upload
+    #数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/book?serverTimezone=GMT
+    username: root
+    password: 123
+  #jackson
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: GMT+8
+
+#整合mybatis
+mybatis:
+  #config-location: mybatis-config.xml
+  type-aliases-package: com.cssl.pojo
+  #mapper-locations: classpath:com/cssl/mapper/*.xml 也可以用注解扫描接口
+  configuration:
+    auto-mapping-behavior: full
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #pagehelper分页插件配置
+
+  #分页设置
+pagehelper:
+  auto-dialect: true
+  page-size-zero: true
+  reasonable: true
+
+
